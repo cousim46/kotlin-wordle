@@ -3,7 +3,7 @@ package stage
 import stage.step.Step
 
 data class Stage(val answer: String, var state: State = State.PROGRESS) {
-
+  val STEP_SIZE = 6
   val steps = mutableListOf<Step>()
 
   enum class State {
@@ -19,12 +19,12 @@ data class Stage(val answer: String, var state: State = State.PROGRESS) {
       state = State.COMPLETE
     }
 
-    if (steps.size == 6 && state != State.COMPLETE) {
+    if (steps.size == STEP_SIZE && state != State.COMPLETE) {
       state = State.FAIL
     }
   }
 
   fun canPlay(): Boolean {
-    return state != State.COMPLETE && state != State.FAIL
+    return state === State.PROGRESS
   }
 }

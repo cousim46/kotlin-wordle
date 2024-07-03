@@ -24,6 +24,8 @@ class StageTest {
   fun `스테이지가 Complete일 때 더이상 play를 할 수 없음`() {
     val stage = Stage("answer", Stage.State.COMPLETE)
     assertThat(stage.canPlay()).isFalse()
+    val a = 1
+    
   }
 
 

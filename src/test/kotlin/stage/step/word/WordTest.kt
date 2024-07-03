@@ -1,6 +1,7 @@
 package stage.step.word
 
 
+import exception.WordleException
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
@@ -12,7 +13,7 @@ class WordTest {
   @ValueSource(strings = ["-1", "1", " ", "w!", " ;fs"])
   fun `모두 영문으로 구성된다`(value: String) {
     //when
-    val errorResponse = assertThrows<IllegalArgumentException> { Word.fromInput(value) }
+    val errorResponse = assertThrows<WordleException> { Word.fromInput(value) }
 
     ///then
     assertThat(errorResponse.message).isEqualTo("영문만 입력해야합니다.")
@@ -20,9 +21,9 @@ class WordTest {
 
   @ParameterizedTest
   @ValueSource(strings = ["test", "hi", "h", "tttttt"])
-  fun `5글자가 아니면 IllegalArgumentException 예외가 발생한다`(value: String) {
+  fun `5글자가 아니면 WordleException 예외가 발생한다`(value: String) {
     //when
-    val errorResponse = assertThrows<IllegalArgumentException> { Word.fromInput(value) }
+    val errorResponse = assertThrows<WordleException> { Word.fromInput(value) }
 
     ///then
     assertThat(errorResponse.message).isEqualTo("5글자여야 합니다.")
@@ -35,9 +36,9 @@ class WordTest {
 
   @ParameterizedTest
   @ValueSource(strings = ["testa", "hiwww", "heeee", "tttaa"])
-  fun `존재하지 않으면 IllegalArgumentException 예외가 발생한다`(value: String) {
+  fun `존재하지 않으면 WordleException 예외가 발생한다`(value: String) {
     val errorResponse =
-      assertThrows<IllegalArgumentException> { Word.fromInput(value) { _ -> false } }
+      assertThrows<WordleException> { Word.fromInput(value) { _ -> false } }
 
     //then
     assertThat(errorResponse.message).isEqualTo("존재하지 않는 단어입니다.")

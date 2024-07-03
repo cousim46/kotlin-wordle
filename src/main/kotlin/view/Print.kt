@@ -46,9 +46,9 @@ class Print {
       val str: StringBuilder = StringBuilder()
       step.code.forEach {
         when (it) {
-          Step.Result.CORRECT -> str.append("\uD83D\uDFE9")
-          Step.Result.MISMATCH -> str.append("\uD83D\uDFE8")
-          Step.Result.WRONG -> str.append("⬜")
+          Step.Result.CORRECT -> Step.Result.CORRECT.color
+          Step.Result.MISMATCH -> Step.Result.MISMATCH.color
+          Step.Result.WRONG -> Step.Result.WRONG.color
         }
       }
       println(str)
